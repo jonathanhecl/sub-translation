@@ -3,10 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"os"
-	"strings"
 
 	"github.com/jonathanhecl/gollama"
+	"github.com/jonathanhecl/subtitle-processor/subtitles"
 )
 
 var (
@@ -24,37 +23,19 @@ func main() {
 		return
 	}
 
-	data, format, err := loadFile("red-en.srt")
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
+	sub := subtitles.Subtitle{}
+	sub.LoadFilename("red-en.srt")
 
-	fmt.Println(len(string(data)), format)
+	fmt.Println(len(sub.Lines), sub.Format)
 
-	r, err := g.Chat(ctx, `Translate the following subtitles from English to Spanish: \n'\n`+
-		string(data)+
-		`\n'\n\nFormat: `+FORMAT_SYNTAX[format]+`\nIMPORTANT: Only change {{.Text}}.`)
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
+	// r, err := g.Chat(ctx, `Translate the following subtitles from English to Spanish: \n'\n`+
+	// 	string(data)+
+	// 	`\n'\n\nFormat: `+FORMAT_SYNTAX[format]+`\nIMPORTANT: Only change {{.Text}}.`)
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// 	return
+	// }
 
-	fmt.Println(r.Content)
+	// fmt.Println(r.Content)
 
-}
-
-func loadFile(filename string) ([]byte, string, error) {
-	data, err := os.ReadFile(filename)
-	if err != nil {
-		return nil, "", err
-	}
-
-	if strings.HasSuffix(filename, ".srt") {
-		return data, FORMAT_SRT, nil
-	} else if strings.HasSuffix(filename, ".ssa") {
-		return data, FORMAT_SSA, nil
-	}
-
-	return data, "", nil
 }
