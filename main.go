@@ -9,11 +9,6 @@ import (
 	"github.com/jonathanhecl/gollama"
 )
 
-const (
-	FORMAT_SRT = "srt"
-	FORMAT_SSA = "ssa"
-)
-
 var (
 	version = "0.1.0"
 )
@@ -35,7 +30,18 @@ func main() {
 		return
 	}
 
-	fmt.Println(string(data), format)
+	fmt.Println(len(string(data)), format)
+
+	r, err := g.Chat(ctx, `Translate the following subtitles from English to Spanish: \n'\n`+
+		string(data)+
+		`\n'\n\nFormat: `+FORMAT_SYNTAX[format]+`\nIMPORTANT: Only change {{.Text}}.`)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	fmt.Println(r.Content)
+
 }
 
 func loadFile(filename string) ([]byte, string, error) {
