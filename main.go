@@ -24,7 +24,11 @@ func main() {
 	}
 
 	sub := subtitles.Subtitle{}
-	sub.LoadFilename("red-en.srt")
+	err := sub.LoadFile("./red-en.srt")
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 
 	fmt.Println(len(sub.Lines), sub.Format)
 

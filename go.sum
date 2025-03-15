@@ -1,4 +1,4 @@
 github.com/jonathanhecl/gollama v1.0.28 h1:jLKHjZuEcYcz8wMbjIzg+4tBhJJO1yaTom/HzpEVVgM=
 github.com/jonathanhecl/gollama v1.0.28/go.mod h1:NSNoKEtDf/MpGN7zK/BM87Zcmrv7tE6kzJ29vKzYMhE=
-github.com/jonathanhecl/subtitle-processor v0.0.0-20250314034546-9008c14ab4c5 h1:jfuHscA20dA1wMgx/FWWBO1DLDmLgfvtLL1vkPSl2zg=
-github.com/jonathanhecl/subtitle-processor v0.0.0-20250314034546-9008c14ab4c5/go.mod h1:LcqtpU1DimoTF3Vfuy4ja5a3Ex9JgvkeSBufLuhxDSY=
+github.com/jonathanhecl/subtitle-processor v1.0.1 h1:/TJHc06GD9fORcxPvCnFJUOZzN7X3uV0FOHh2i18IPk=
+github.com/jonathanhecl/subtitle-processor v1.0.1/go.mod h1:LcqtpU1DimoTF3Vfuy4ja5a3Ex9JgvkeSBufLuhxDSY=
