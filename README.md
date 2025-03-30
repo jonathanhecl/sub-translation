@@ -1,4 +1,4 @@
-# Sub-Translation
+# 🔊Sub-Translation
 
 A tool to translate subtitle files using Ollama models in local.
 
