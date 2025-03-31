@@ -2,6 +2,13 @@
 
 A tool to translate subtitle files using Ollama models in local.
 
+## Features
+
+- Translate subtitle files
+- Support for SRT and SSA files
+- 100% local models (no internet connection required)
+- Can translate every language supported by the model
+
 ## Requirements
 
 - Ollama (https://ollama.com/)
