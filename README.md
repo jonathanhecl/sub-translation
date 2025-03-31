@@ -2,12 +2,6 @@
 
 A tool to translate subtitle files using Ollama models in local.
 
-## Installation
-
-```sh
-go get github.com/jonathanhecl/sub-translation
-```
-
 ## Usage
 
 ```sh
