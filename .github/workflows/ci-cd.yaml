@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 env:
   GOVERSION: "1.23"
