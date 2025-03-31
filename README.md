@@ -17,7 +17,7 @@ A tool to translate subtitle files using Ollama models in local.
 ## Usage
 
 ```sh
-sub-translation -s=<source.srt> [-t=<target.srt>] [-o=<language>] [-l=<language>] [-m=<model>]
+SubTranslation -s=<source.srt> [-t=<target.srt>] [-o=<language>] [-l=<language>] [-m=<model>]
 ```
 
 ### Parameters
