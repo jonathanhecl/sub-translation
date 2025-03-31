@@ -2,6 +2,11 @@
 
 A tool to translate subtitle files using Ollama models in local.
 
+## Requirements
+
+- Ollama (https://ollama.com/)
+- Ollama model (default: phi4)
+
 ## Usage
 
 ```sh
