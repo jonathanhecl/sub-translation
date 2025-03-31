@@ -25,3 +25,7 @@ sub-translation -s=<source.srt> [-t=<target.srt>] [-o=<language>] [-l=<language>
 ## License
 
 [MIT](LICENSE)
+
+## Release
+
+[Release](https://github.com/jonathanhecl/sub-translation/releases)
