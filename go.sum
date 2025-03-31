@@ -6,6 +6,8 @@ github.com/jonathanhecl/gotimeleft v0.0.2 h1:icc0MmxdrB9ZIt2cf6cQIJkUxbWKyxMmElY
 github.com/jonathanhecl/gotimeleft v0.0.2/go.mod h1:5xgngX2wWmPCfMXrNvQCWvgJ/3d5KiWWPiqGRpwiWQg=
 github.com/jonathanhecl/subtitle-processor v1.0.3 h1:Qp+TZu0gpaQtQGuj/SBPYYjq27zRhsKt4Hx8BpbrOno=
 github.com/jonathanhecl/subtitle-processor v1.0.3/go.mod h1:LcqtpU1DimoTF3Vfuy4ja5a3Ex9JgvkeSBufLuhxDSY=
+github.com/jonathanhecl/subtitle-processor v1.0.4 h1:Z8p8GYtLcTyX5XNoLACal94k97/epozoh3Ho9sQ4wW4=
+github.com/jonathanhecl/subtitle-processor v1.0.4/go.mod h1:LcqtpU1DimoTF3Vfuy4ja5a3Ex9JgvkeSBufLuhxDSY=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.8.0 h1:pSgiaMZlXftHpm5L7V1+rVB+AZJydKsMxsQBIJw4PKk=

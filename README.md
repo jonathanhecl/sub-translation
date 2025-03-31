@@ -32,7 +32,7 @@ sub-translation -s=<source.srt> [-t=<target.srt>] [-o=<language>] [-l=<language>
 
 ![Screenshot](https://i.imgur.com/ba4fIJR.png)
 
-![Screenshot](https://i.imgur.com/5k3wdWh.png)
+![Screenshot](https://i.imgur.com/ngGzmTL.png)
 
 ## License
 
