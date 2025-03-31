@@ -22,6 +22,7 @@ var (
 	originalLang = "English"
 	lang         = "Español neutro"
 	// Variables para seguimiento del progreso
+	progressSize  = 32
 	progress      *gotimeleft.TimeLeft
 	progressMutex sync.Mutex
 )
@@ -131,7 +132,7 @@ func main() {
 	close(stopProgress)
 
 	// Mostrar progreso final
-	fmt.Printf("\nTranslation progress: %s %s lines (100%%) - Total time: %s\n", progress.GetProgressBar(64), progress.GetProgressValues(), progress.GetTimeSpent().String())
+	fmt.Printf("\nTranslation progress: %s %s lines (100%%) - Total time: %s\n", progress.GetProgressBar(progressSize), progress.GetProgressValues(), progress.GetTimeSpent().String())
 
 	// Save translated subtitles
 	fmt.Println("Saving translated subtitles to", translate.Filename)
@@ -148,11 +149,17 @@ func showProgress(stop chan struct{}) {
 	ticker := time.NewTicker(2 * time.Second)
 	defer ticker.Stop()
 
+	lastProgress := -1.0
+
 	for {
 		select {
 		case <-ticker.C:
+			if lastProgress == progress.GetFloat64() {
+				continue
+			}
 			progressMutex.Lock()
-			fmt.Printf("\rTranslation progress: %s %s lines (%s) - Total time: %s - Left time: %s\n", progress.GetProgressBar(64), progress.GetProgressValues(), progress.GetProgress(1), progress.GetTimeSpent().String(), progress.GetTimeLeft().String())
+			lastProgress = progress.GetFloat64()
+			fmt.Printf("\rTranslation progress: %s %s lines (%s) - Total time: %s - Left time: %s\n", progress.GetProgressBar(progressSize), progress.GetProgressValues(), progress.GetProgress(1), progress.GetTimeSpent().String(), progress.GetTimeLeft().String())
 			progressMutex.Unlock()
 		case <-stop:
 			return
@@ -180,7 +187,7 @@ func processSubtitles(ctx context.Context, g *gollama.Gollama, source subtitles.
 			// Add previous translated lines as context
 			for j := startIdx; j < i; j++ {
 				if len(target.Lines[j].Text) > 0 {
-					fmt.Printf("[DEBUG] Adding context: %s\n", strings.Join(target.Lines[j].Text, " "))
+					// fmt.Printf("[DEBUG] Adding context: %s\n", strings.Join(target.Lines[j].Text, " "))
 					context = append(context, strings.Join(target.Lines[j].Text, " "))
 				}
 			}
@@ -198,10 +205,11 @@ func processSubtitles(ctx context.Context, g *gollama.Gollama, source subtitles.
 
 			// Try each alternative strategy
 			for strategy := 1; strategy <= 3 && !success; strategy++ {
-				fmt.Printf("Trying alternative strategy %d for line %d\n", strategy, i+1)
-				fmt.Printf("[DEBUG] Line: %v\n", source.Lines[i])
+				// fmt.Printf("Trying alternative strategy %d for line %d\n", strategy, i+1)
 				translated, err = attemptTranslation(ctx, g, []modelSubtitles.ModelItemSubtitle{source.Lines[i]}, nil, strategy)
 				if err == nil && len(translated) > 0 {
+					// fmt.Printf("[DEBUG] Line: %v\n", source.Lines[i])
+					// fmt.Printf("[DEBUG] Translated: %v\n", translated[0])
 					success = true
 					break
 				}
@@ -216,7 +224,7 @@ func processSubtitles(ctx context.Context, g *gollama.Gollama, source subtitles.
 		}
 
 		// Update target with translated line
-		fmt.Printf("[DEBUG] Translated line: %v\n", translated[0])
+		// fmt.Printf("[DEBUG] Translated line: %v\n", translated[0])
 		target.Lines[i] = translated[0]
 
 		// Update progress counter
@@ -253,9 +261,9 @@ func attemptTranslation(ctx context.Context, g *gollama.Gollama, lines []modelSu
 	var output outputType
 	response.DecodeContent(&output)
 
-	fmt.Println("Input prompt:")
-	fmt.Println(prompt)
-	fmt.Println("Translation response:", output.Translation)
+	// fmt.Println("Input prompt:")
+	// fmt.Println(prompt)
+	// fmt.Println("Translation response:", output.Translation)
 
 	if strings.TrimSpace(output.Translation) == "" {
 		return nil, fmt.Errorf("empty translation response")
@@ -269,7 +277,7 @@ func attemptTranslation(ctx context.Context, g *gollama.Gollama, lines []modelSu
 		return nil, fmt.Errorf("no valid translations in response")
 	}
 
-	fmt.Printf("Translated lines: %+v\n", translatedLines)
+	// fmt.Printf("Translated lines: %+v\n", translatedLines)
 
 	return translatedLines, nil
 }
@@ -342,8 +350,16 @@ func buildAlternativePrompt(strategy int, linesToTranslate []modelSubtitles.Mode
 func processTranslatedResponse(response string, originalLines []modelSubtitles.ModelItemSubtitle) []modelSubtitles.ModelItemSubtitle {
 	responseLines := strings.Split(strings.TrimSpace(response), "\n")
 
+	// Filter out empty strings
+	filteredResponseLines := []string{}
+	for _, line := range responseLines {
+		if line != "" {
+			filteredResponseLines = append(filteredResponseLines, line)
+		}
+	}
+
 	translatedLines := originalLines
-	translatedLines[0].Text = responseLines
+	translatedLines[0].Text = filteredResponseLines
 
 	return translatedLines
 }

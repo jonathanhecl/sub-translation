@@ -66,7 +66,7 @@ func TestProcessTranslatedResponse(t *testing.T) {
 	if len(translatedLines[0].Text) != 2 {
 		t.Errorf("Expected 2 text items in first line, got %d", len(translatedLines[0].Text))
 	}
-	
+
 	if translatedLines[0].Text[0] != "Hola" || translatedLines[0].Text[1] != "Mundo" {
 		t.Errorf("Incorrect translation in first line: %v", translatedLines[0].Text)
 	}
@@ -88,7 +88,7 @@ func TestProcessTranslatedResponse(t *testing.T) {
 	if len(translatedLines[0].Text) != 1 {
 		t.Errorf("Expected 1 text item in first line, got %d", len(translatedLines[0].Text))
 	}
-	
+
 	if translatedLines[0].Text[0] != "Hola" {
 		t.Errorf("First line should be translated: %v", translatedLines[0])
 	}
@@ -110,11 +110,27 @@ func TestProcessTranslatedResponse(t *testing.T) {
 	if len(translatedLines[0].Text) != 3 {
 		t.Errorf("Expected 3 text items in first line, got %d", len(translatedLines[0].Text))
 	}
-	
-	if translatedLines[0].Text[0] != "Hola" || 
-	   translatedLines[0].Text[1] != "Mundo" || 
-	   translatedLines[0].Text[2] != "Extra" {
+
+	if translatedLines[0].Text[0] != "Hola" ||
+		translatedLines[0].Text[1] != "Mundo" ||
+		translatedLines[0].Text[2] != "Extra" {
 		t.Errorf("Incorrect translation in first line: %v", translatedLines[0].Text)
+	}
+
+	// Test case 4: Response removing empty lines
+	response = "Hola\n\nMundo"
+	translatedLines = processTranslatedResponse(response, originalLines)
+
+	if len(translatedLines[0].Text) != 2 {
+		t.Errorf("Expected 2 text items in first line, got %d", len(translatedLines[0].Text))
+	}
+
+	if translatedLines[0].Text[0] != "Hola" {
+		t.Errorf("First line should be Hola, got %v", translatedLines[0].Text[0])
+	}
+
+	if translatedLines[0].Text[1] != "Mundo" {
+		t.Errorf("Second line should be Mundo, got %v", translatedLines[0].Text[1])
 	}
 }
 
