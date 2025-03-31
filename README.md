@@ -28,6 +28,12 @@ sub-translation -s=<source.srt> [-t=<target.srt>] [-o=<language>] [-l=<language>
 - `-l=<language>`: Target language (optional, default: Español neutro)
 - `-m=<model>`: Ollama model (optional, default: phi4)
 
+### Screenshots
+
+![Screenshot](https://i.imgur.com/ba4fIJR.png)
+
+![Screenshot](https://i.imgur.com/5k3wdWh.png)
+
 ## License
 
 [MIT](LICENSE)
