@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"path"
 	"strings"
 	"sync"
 	"time"
@@ -76,7 +77,8 @@ func main() {
 
 	if target == "" {
 		// Auto-generate target filename
-		target = strings.TrimSuffix(source, ".srt") + "_translated.srt"
+		ext := path.Ext(source)
+		target = strings.TrimSuffix(source, ext) + "_modified" + ext
 	}
 
 	fmt.Println("Source:", source)
