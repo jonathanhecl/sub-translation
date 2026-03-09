@@ -12,7 +12,17 @@ A tool to translate subtitle files using Ollama models in local.
 ## Requirements
 
 - Ollama (https://ollama.com/)
-- Ollama model (default: phi4)
+- Ollama model (default: phi4:14b)
+
+## About the models
+
+- Good results:
+  - phi4:14b (10GB RAM)
+  - translategemma:12b (9GB RAM)
+  - ministral-3:8b (6GB RAM)
+  - translategemma:4b (4GB RAM)
+- Poor results:
+  - Don't use reasoning models for speed.
 
 ## Usage
 

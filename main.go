@@ -19,7 +19,7 @@ var (
 	version      = "1.0.1"
 	source       = ""
 	target       = ""
-	model        = "phi4"
+	model        = "translategemma:4b"
 	originalLang = "English"
 	lang         = "Español neutro"
 	// Variables para seguimiento del progreso
