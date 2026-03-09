@@ -12,7 +12,7 @@ A tool to translate subtitle files using Ollama models in local.
 ## Requirements
 
 - Ollama (https://ollama.com/)
-- Ollama model (default: phi4:14b)
+- Ollama model (default: translategemma:4b)
 
 ## About the models
 
@@ -36,7 +36,7 @@ SubTranslation -s=<source.srt> [-t=<target.srt>] [-o=<language>] [-l=<language>]
 - `-t=<target.srt>`: Target subtitle file (optional, default: source_translated.srt)
 - `-o=<language>`: Original language (optional, default: English)
 - `-l=<language>`: Target language (optional, default: Español neutro)
-- `-m=<model>`: Ollama model (optional, default: phi4)
+- `-m=<model>`: Ollama model (optional, default: translategemma:4b)
 
 ### Screenshots
 
